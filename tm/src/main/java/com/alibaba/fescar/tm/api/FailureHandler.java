@@ -19,6 +19,7 @@ package com.alibaba.fescar.tm.api;
 /**
  * Callback on failure.
  */
+//失败时处理器
 public interface FailureHandler {
 
     /**
@@ -27,6 +28,7 @@ public interface FailureHandler {
      * @param tx    the tx
      * @param cause the cause
      */
+    //启动事务失败
     void onBeginFailure(GlobalTransaction tx, Throwable cause);
 
     /**
@@ -35,6 +37,7 @@ public interface FailureHandler {
      * @param tx    the tx
      * @param cause the cause
      */
+    //提交事务失败
     void onCommitFailure(GlobalTransaction tx, Throwable cause);
 
     /**
@@ -43,5 +46,6 @@ public interface FailureHandler {
      * @param tx    the tx
      * @param cause the cause
      */
+    //回滚事务失败
     void onRollbackFailure(GlobalTransaction tx, Throwable cause);
 }

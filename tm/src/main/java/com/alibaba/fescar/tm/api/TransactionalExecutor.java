@@ -27,6 +27,7 @@ public interface TransactionalExecutor {
      * @return What the business logic returns.
      * @throws Throwable Any throwable during executing.
      */
+    //执行业务功能逻辑
     Object execute() throws Throwable;
 
     /**
@@ -34,6 +35,7 @@ public interface TransactionalExecutor {
      *
      * @return timeout in MILLISECONDS.
      */
+    //全局事务超时时间
     int timeout();
 
     /**
@@ -41,47 +43,53 @@ public interface TransactionalExecutor {
      *
      * @return Given name.
      */
+    //全局事务名称
     String name();
 
     /**
      * The enum Code.
      */
+    //事务状态
     enum Code {
 
         /**
          * Begin failure code.
          */
-        //
+        //启动事务失败
         BeginFailure,
 
         /**
          * Commit failure code.
          */
-        //
+        //提交事务失败
         CommitFailure,
 
         /**
          * Rollback failure code.
          */
-        //
+        //回滚事务失败
         RollbackFailure,
 
         /**
          * Rollback done code.
          */
-        //
+        //回滚事务完成
         RollbackDone
     }
 
     /**
      * The type Execution exception.
      */
+    //事务执行异常
     class ExecutionException extends Exception {
 
+        //全局事务
         private GlobalTransaction transaction;
 
+        //事务状态码
         private Code code;
 
+        //执行事务过程原异常信息
         private Throwable originalException;
 
         /**

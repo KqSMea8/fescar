@@ -33,16 +33,22 @@ public class DefaultGlobalTransaction implements GlobalTransaction {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DefaultGlobalTransaction.class);
 
+    //默认全局事务超时时间
     private static final int DEFAULT_GLOBAL_TX_TIMEOUT = 60000;
 
+    //默认全局事务实例名称
     private static final String DEFAULT_GLOBAL_TX_NAME = "default";
 
+    //事务管理器
     private TransactionManager transactionManager;
 
+    //全局事务ID
     private String xid;
 
+    //全局事务状态
     private GlobalStatus status = GlobalStatus.UnKnown;
 
+    //默认角色为发起者
     private GlobalTransactionRole role = GlobalTransactionRole.Launcher;
 
     /**
@@ -78,8 +84,9 @@ public class DefaultGlobalTransaction implements GlobalTransaction {
 
     @Override
     public void begin(int timeout, String name) throws TransactionException {
-        //事物发起者,主服务
+        //事物发起者&主服务
         if (xid == null && role == GlobalTransactionRole.Launcher) {
+            //向事务管理器远程请求全局xid,将全局事务状态更改为开始
             xid = transactionManager.begin(null, null, name, timeout);
             status = GlobalStatus.Begin;
             RootContext.bind(xid);

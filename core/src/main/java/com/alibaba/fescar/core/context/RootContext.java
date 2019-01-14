@@ -37,10 +37,12 @@ public class RootContext {
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("bind " + xid);
         }
+        //增加事务ID上下文
         CONTEXT_HOLDER.put(KEY_XID, xid);
     }
 
     public static String unbind() {
+        //删除事务ID上下文
         String xid = CONTEXT_HOLDER.remove(KEY_XID);
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("unbind " + xid);
@@ -48,6 +50,7 @@ public class RootContext {
         return xid;
     }
 
+    //判断当前是否处于全局事务中
     public static boolean inGlobalTransaction() {
         return CONTEXT_HOLDER.get(KEY_XID) != null;
     }

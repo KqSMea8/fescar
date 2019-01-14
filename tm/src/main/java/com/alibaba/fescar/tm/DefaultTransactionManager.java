@@ -60,6 +60,7 @@ public class DefaultTransactionManager implements TransactionManager {
 
     @Override
     public String begin(String applicationId, String transactionServiceGroup, String name, int timeout) throws TransactionException {
+        //向Server申请一个全局事务ID，开启事务
         GlobalBeginRequest request = new GlobalBeginRequest();
         request.setTransactionName(name);
         request.setTimeout(timeout);
@@ -69,6 +70,7 @@ public class DefaultTransactionManager implements TransactionManager {
 
     @Override
     public GlobalStatus commit(String xid) throws TransactionException {
+        //向Sever请求，提交事务
         long txId = XID.getTransactionId(xid);
         GlobalCommitRequest globalCommit = new GlobalCommitRequest();
         globalCommit.setTransactionId(txId);
@@ -78,6 +80,7 @@ public class DefaultTransactionManager implements TransactionManager {
 
     @Override
     public GlobalStatus rollback(String xid) throws TransactionException {
+        //向Server请求，回滚事务
         long txId = XID.getTransactionId(xid);
         GlobalRollbackRequest globalRollback = new GlobalRollbackRequest();
         globalRollback.setTransactionId(txId);
@@ -87,6 +90,7 @@ public class DefaultTransactionManager implements TransactionManager {
 
     @Override
     public GlobalStatus getStatus(String xid) throws TransactionException {
+        //向Server请求，查询事务状态
         long txId = XID.getTransactionId(xid);
         GlobalStatusRequest queryGlobalStatus = new GlobalStatusRequest();
         queryGlobalStatus.setTransactionId(txId);
@@ -94,6 +98,7 @@ public class DefaultTransactionManager implements TransactionManager {
         return response.getGlobalStatus();
     }
 
+    //向Server同步发出请求
     private AbstractTransactionResponse syncCall(AbstractTransactionRequest request) throws TransactionException {
         try {
             return (AbstractTransactionResponse) TmRpcClient.getInstance().sendMsgWithResponse(request);

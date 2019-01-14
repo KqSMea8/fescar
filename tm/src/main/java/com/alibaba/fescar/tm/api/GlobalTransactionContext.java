@@ -21,6 +21,7 @@ import com.alibaba.fescar.core.context.RootContext;
 /**
  * Context of global transaction on current thread.
  */
+//全局事务上下文环境
 public class GlobalTransactionContext {
 
     private static final ThreadLocal<GlobalTransaction> THREAD_TRANSACTION_CONTEXT = new ThreadLocal<>();
@@ -33,7 +34,7 @@ public class GlobalTransactionContext {
      * @return
      */
     private static GlobalTransaction createNew() {
-        //创建一个全局事物
+        //创建一个全局事物，本地线程变成保存
         GlobalTransaction tx = new DefaultGlobalTransaction();
         THREAD_TRANSACTION_CONTEXT.set(tx);
         return THREAD_TRANSACTION_CONTEXT.get();
@@ -44,6 +45,7 @@ public class GlobalTransactionContext {
      *
      * @return null if no transaction context there.
      */
+    //获取当前线程环境下的事务实例
     public static GlobalTransaction getCurrent() {
         GlobalTransaction tx = THREAD_TRANSACTION_CONTEXT.get();
         if (tx != null) {
@@ -64,6 +66,7 @@ public class GlobalTransactionContext {
      *
      * @return new context if no existing there.
      */
+    //获取当前全局事务实例或者新建一个全局事务
     public static GlobalTransaction getCurrentOrCreate() {
         GlobalTransaction tx = getCurrent();
         if (tx == null) {
@@ -75,6 +78,7 @@ public class GlobalTransactionContext {
     /**
      * Clean context.
      */
+    //清理当前上下文全局事务
     public static void clean() {
         THREAD_TRANSACTION_CONTEXT.remove();
         RootContext.unbind();

@@ -39,6 +39,7 @@ public interface GlobalTransaction {
      * @throws TransactionException Any exception that fails this will be wrapped with TransactionException and thrown
      * out.
      */
+    //开启一个新的全局事务
     void begin(int timeout) throws TransactionException;
 
     /**
@@ -49,6 +50,7 @@ public interface GlobalTransaction {
      * @throws TransactionException Any exception that fails this will be wrapped with TransactionException and thrown
      * out.
      */
+    //开启一个新的全局事务
     void begin(int timeout, String name) throws TransactionException;
 
     /**
@@ -57,6 +59,7 @@ public interface GlobalTransaction {
      * @throws TransactionException Any exception that fails this will be wrapped with TransactionException and thrown
      * out.
      */
+    //提交全局事务
     void commit() throws TransactionException;
 
     /**
@@ -65,6 +68,7 @@ public interface GlobalTransaction {
      * @throws TransactionException Any exception that fails this will be wrapped with TransactionException and thrown
      * out.
      */
+    //回滚
     void rollback() throws TransactionException;
 
     /**
@@ -75,6 +79,7 @@ public interface GlobalTransaction {
      * out.
      * @see GlobalStatus
      */
+    //获取全局事务状态
     GlobalStatus getStatus() throws TransactionException;
 
     /**
@@ -82,6 +87,7 @@ public interface GlobalTransaction {
      *
      * @return XID. xid
      */
+    //获取全局事务ID
     String getXid();
 
 }

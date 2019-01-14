@@ -348,6 +348,7 @@ public abstract class AbstractRpcRemoting extends ChannelDuplexHandler {
 
     @Override
     public void channelRead(final ChannelHandlerContext ctx, Object msg) throws Exception {
+        //RPCMessage类型
         if (msg instanceof RpcMessage) {
             final RpcMessage rpcMessage = (RpcMessage)msg;
             if (rpcMessage.isRequest()) {

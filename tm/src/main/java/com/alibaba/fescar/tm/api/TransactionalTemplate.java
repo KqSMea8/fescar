@@ -28,7 +28,7 @@ public class TransactionalTemplate {
      *
      * @param business the business
      * @return the object
-     * @throws ExecutionException the execution exception
+     * @throws TransactionalExecutor.ExecutionException the execution exception
      */
     public Object execute(TransactionalExecutor business) throws TransactionalExecutor.ExecutionException {
 
@@ -50,12 +50,14 @@ public class TransactionalTemplate {
         try {
 
             // Do Your Business
+            //执行业务逻辑
             rs = business.execute();
 
         } catch (Throwable ex) {
 
             // 3. any business exception, rollback.
             try {
+                //异常回滚
                 tx.rollback();
 
                 // 3.1 Successfully rolled back
