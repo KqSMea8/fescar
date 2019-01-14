@@ -77,6 +77,7 @@ public final class RmRpcClient extends AbstractRpcRemotingClient {
     private final ConcurrentMap<String, NettyPoolKey> poolKeyMap = new ConcurrentHashMap<String, NettyPoolKey>();
     private final ConcurrentMap<String, Channel> channels = new ConcurrentHashMap<>();
     private String customerKeys;
+    //初始化原子标识
     private final AtomicBoolean initialized = new AtomicBoolean(false);
     private static final int MAX_MERGE_SEND_THREAD = 1;
     private static final long KEEP_ALIVE_TIME = Integer.MAX_VALUE;
@@ -147,12 +148,14 @@ public final class RmRpcClient extends AbstractRpcRemotingClient {
     public void init() {
         if (initialized.compareAndSet(false, true)) {
             super.init();
+            //重试保持连接
             timerExecutor.scheduleAtFixedRate(new Runnable() {
                 @Override
                 public void run() {
                     reconnect();
                 }
             }, SCHEDULE_INTERVAL_MILLS, SCHEDULE_INTERVAL_MILLS, TimeUnit.SECONDS);
+
             ExecutorService mergeSendExecutorService = new ThreadPoolExecutor(MAX_MERGE_SEND_THREAD,
                 MAX_MERGE_SEND_THREAD,
                 KEEP_ALIVE_TIME, TimeUnit.MILLISECONDS,

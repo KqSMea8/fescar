@@ -22,8 +22,10 @@ import java.sql.SQLException;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.fescar.core.model.Resource;
 
+//数据源代理类
 public class DataSourceProxy extends AbstractDataSourceProxy implements Resource {
 
+    //资源分组ID
     private String resourceGroupId = "DEFAULT";
 
     private boolean managed = false;
@@ -38,6 +40,7 @@ public class DataSourceProxy extends AbstractDataSourceProxy implements Resource
 
     private void assertManaged() {
         if (!managed) {
+            //注册资源
             DataSourceManager.get().registerResource(this);
             managed = true;
         }

@@ -45,6 +45,7 @@ public class AsyncWorker implements ResourceManagerInbound {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AsyncWorker.class);
 
+    //两阶段上下文
     private static class Phase2Context {
 
         public Phase2Context(String xid, long branchId, String resourceId, String applicationData) {
@@ -53,18 +54,24 @@ public class AsyncWorker implements ResourceManagerInbound {
             this.resourceId = resourceId;
             this.applicationData = applicationData;
         }
-
+        //事务ID
         String xid;
+        //分支ID
         long branchId;
+        //资源ID
         String resourceId;
+        //应用数据
         String applicationData;
     }
 
+    //异步提交缓冲池
     private static final List<Phase2Context> ASYNC_COMMIT_BUFFER = Collections.synchronizedList(new ArrayList<Phase2Context>());
 
+    //异步提交缓冲池大小
     private static int ASYNC_COMMIT_BUFFER_LIMIT = ConfigurationFactory.getInstance().getInt(
         CLIENT_ASYNC_COMMIT_BUFFER_LIMIT, 10000);
 
+    //调度线程池
     private static ScheduledExecutorService timerExecutor;
 
     @Override
@@ -81,6 +88,7 @@ public class AsyncWorker implements ResourceManagerInbound {
         LOGGER.info("Async Commit Buffer Limit: " + ASYNC_COMMIT_BUFFER_LIMIT);
         timerExecutor = new ScheduledThreadPoolExecutor(1,
             new NamedThreadFactory("AsyncWorker", 1, true));
+        //定时调度提交分支事务
         timerExecutor.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {

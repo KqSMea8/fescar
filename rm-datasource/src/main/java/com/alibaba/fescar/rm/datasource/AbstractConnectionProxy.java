@@ -39,10 +39,13 @@ import com.alibaba.fescar.core.context.RootContext;
 
 public abstract class AbstractConnectionProxy implements Connection {
 
+    //数据源代理对象
     protected DataSourceProxy dataSourceProxy;
 
+    //连接代理对象
     protected Connection targetConnection;
 
+    //DB类型
     protected String dbType;
 
     public AbstractConnectionProxy(DataSourceProxy dataSourceProxy, Connection targetConnection, String dbType) {

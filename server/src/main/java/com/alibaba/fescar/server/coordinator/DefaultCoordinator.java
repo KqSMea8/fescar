@@ -239,6 +239,7 @@ public class DefaultCoordinator extends AbstractTCInboundHandler
         new NamedThreadFactory("TxTimeoutCheck", 1));
 
     public void init() {
+        //重试回滚
         retryRollbacking.scheduleAtFixedRate(new Runnable() {
 
             @Override
@@ -252,7 +253,7 @@ public class DefaultCoordinator extends AbstractTCInboundHandler
             }
         }, 0, 5, TimeUnit.MILLISECONDS);
 
-
+        //尝试提交
         retryCommitting.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
@@ -265,6 +266,7 @@ public class DefaultCoordinator extends AbstractTCInboundHandler
             }
         }, 0, 5, TimeUnit.MILLISECONDS);
 
+        //异步提交
         asyncCommitting.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
@@ -277,6 +279,7 @@ public class DefaultCoordinator extends AbstractTCInboundHandler
             }
         }, 0, 10, TimeUnit.MILLISECONDS);
 
+        //超时检测
         timeoutCheck.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {

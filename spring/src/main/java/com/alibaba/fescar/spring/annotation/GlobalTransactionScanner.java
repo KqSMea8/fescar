@@ -272,6 +272,7 @@ public class GlobalTransactionScanner extends AbstractAutoProxyCreator implement
             }
             return;
         }
+        //初始化客户端
         initClient();
 
     }

@@ -21,6 +21,7 @@ import java.util.Map;
 /**
  * Resource Manager: common behaviors.
  */
+//资源管理器
 public interface ResourceManager extends ResourceManagerInbound, ResourceManagerOutbound{
 
     /**
@@ -28,6 +29,7 @@ public interface ResourceManager extends ResourceManagerInbound, ResourceManager
      *
      * @param resource The resource to be managed.
      */
+    //注册资源
     void registerResource(Resource resource);
 
     /**
@@ -35,6 +37,7 @@ public interface ResourceManager extends ResourceManagerInbound, ResourceManager
      *
      * @param resource The resource to be removed.
      */
+    //移除资源
     void unregisterResource(Resource resource);
 
     /**
@@ -42,5 +45,6 @@ public interface ResourceManager extends ResourceManagerInbound, ResourceManager
      *
      * @return resourceId -> Resource Map
      */
+    //获取所有的管理资源
     Map<String, Resource> getManagedResources();
 }

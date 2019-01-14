@@ -57,6 +57,7 @@ public class RpcServer extends AbstractRpcRemotingServer implements ServerMessag
     /**
      * The Server message listener.
      */
+    //消息接收回调监听器
     protected ServerMessageListener serverMessageListener;
 
     private TransactionMessageHandler transactionMessageHandler;
