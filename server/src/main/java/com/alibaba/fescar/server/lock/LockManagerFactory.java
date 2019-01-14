@@ -22,6 +22,7 @@ public class LockManagerFactory {
         private static LockManager INSTANCE = new DefaultLockManagerImpl();
     }
 
+    //获取锁管理器
     public static final LockManager get() {
         return SingletonHolder.INSTANCE;
     }

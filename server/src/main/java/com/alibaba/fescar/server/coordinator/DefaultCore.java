@@ -52,6 +52,7 @@ public class DefaultCore implements Core {
     public Long branchRegister(BranchType branchType, String resourceId, String clientId, String xid, String lockKeys) throws TransactionException {
         GlobalSession globalSession = assertGlobalSession(XID.getTransactionId(xid), GlobalStatus.Begin);
 
+        //分支事务
         BranchSession branchSession = new BranchSession();
         branchSession.setTransactionId(XID.getTransactionId(xid));
         branchSession.setBranchId(UUIDGenerator.generateUUID());

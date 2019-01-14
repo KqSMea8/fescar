@@ -22,10 +22,13 @@ import com.alibaba.fescar.common.exception.ShouldNeverHappenException;
 import com.alibaba.fescar.core.exception.TransactionException;
 
 public class SessionHolder {
-
+    //root目录数据
     private static final String ROOT_SESSION_MANAGER_NAME = "root.data";
+    //异步提交事务数据
     private static final String ASYNC_COMMITTING_SESSION_MANAGER_NAME = "async.commit.data";
+    //重试提交事务数据
     private static final String RETRY_COMMITTING_SESSION_MANAGER_NAME = "retry.commit.data";
+    //重试回滚事务数据
     private static final String RETRY_ROLLBACKING_SESSION_MANAGER_NAME = "retry.rollback.data";
 
     private static SessionManager ROOT_SESSION_MANAGER;

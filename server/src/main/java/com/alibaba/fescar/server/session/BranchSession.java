@@ -32,26 +32,35 @@ import com.alibaba.fescar.server.store.SessionStorable;
 
 public class BranchSession implements Lockable, Comparable<BranchSession>, SessionStorable {
 
+    //全局事务ID
     private long transactionId;
 
+    //分支事务ID
     private long branchId;
 
+    //资源分组ID
     private String resourceGroupId;
 
+    //资源ID
     private String resourceId;
 
     private String lockKey;
 
     private BranchType branchType;
 
+    //分支事务状态
     private BranchStatus status = BranchStatus.Unknown;
 
+    //分支应用ID
     private String applicationId;
 
+    //分支事务服务分组
     private String txServiceGroup;
 
+    //clientID
     private String clientId;
 
+    //应用数据
     private String applicationData;
 
     private ConcurrentHashMap<Map<String, Long>, Set<String>> lockHolder

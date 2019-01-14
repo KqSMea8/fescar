@@ -19,9 +19,12 @@ package com.alibaba.fescar.server.lock;
 import com.alibaba.fescar.core.exception.TransactionException;
 import com.alibaba.fescar.server.session.BranchSession;
 
+//锁管理器
 public interface LockManager {
 
+    //尝试获取锁
     boolean acquireLock(BranchSession branchSession) throws TransactionException;
 
+    //是否可锁
     boolean isLockable(long transactionId, String resourceId, String lockKey) throws TransactionException;
 }

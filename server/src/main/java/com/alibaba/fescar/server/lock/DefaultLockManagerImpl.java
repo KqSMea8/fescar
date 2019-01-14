@@ -29,6 +29,7 @@ import io.netty.util.internal.ConcurrentSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+//默认锁管理器
 public class DefaultLockManagerImpl implements LockManager {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DefaultLockManagerImpl.class);

@@ -23,10 +23,13 @@ import com.alibaba.fescar.core.exception.TransactionException;
  */
 public interface ResourceManagerOutbound {
 
+    //注册分支事务
     Long branchRegister(BranchType branchType, String resourceId, String clientId, String xid, String lockKeys) throws
         TransactionException;
 
+    //分支请求
     void branchReport(String xid, long branchId, BranchStatus status, String applicationData) throws TransactionException;
 
+    //查询资源是否被锁定
     boolean lockQuery(BranchType branchType, String resourceId, String xid, String lockKeys) throws TransactionException;
 }

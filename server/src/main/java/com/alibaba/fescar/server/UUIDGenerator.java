@@ -24,6 +24,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import com.alibaba.fescar.common.exception.ShouldNeverHappenException;
 
+//UUID生成器
 public class UUIDGenerator {
 
     private static AtomicLong UUID = new AtomicLong(1000);

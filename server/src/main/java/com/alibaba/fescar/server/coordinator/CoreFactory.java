@@ -18,6 +18,7 @@ package com.alibaba.fescar.server.coordinator;
 
 public class CoreFactory {
 
+    //单例
     private static class SingletonHolder {
         private static Core INSTANCE = new DefaultCore();
     }
